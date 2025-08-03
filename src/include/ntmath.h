@@ -5,6 +5,15 @@
 
 namespace modular {
 
+typedef unsigned __int128 uint128_t;
+size_t MSB(uint64_t t);
+
+uint64_t barrett_precompute(uint64_t q, size_t logq);
+uint64_t mod_mul_barrett(uint64_t a, uint64_t b, uint64_t q, uint64_t prec, size_t logq);
+
+uint64_t shoup_precompute(uint64_t c, uint64_t q);
+uint64_t mod_mul_shoup(uint64_t a, uint64_t c, uint64_t q, uint64_t prec);
+
 // c = a+b mod q
 inline uint64_t mod_add(uint64_t a, uint64_t b, uint64_t q) {
     // uint64_t d = a + b;
@@ -16,9 +25,10 @@ inline uint64_t mod_add(uint64_t a, uint64_t b, uint64_t q) {
 inline uint64_t mod_sub(uint64_t a, uint64_t b, uint64_t q) {
     // uint64_t d = a - b;
     // return (a > b) ? d : q + d;
-    return (a > b) ? a - b : q + a - b;
+    return (a >= b) ? a - b : q + a - b;
 }
 
-} 
+
+}
 
 #endif /* __NTMATH_H__ */

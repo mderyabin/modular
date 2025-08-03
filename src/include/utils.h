@@ -10,7 +10,7 @@ namespace modular {
 uint64_t generate_number(uint64_t q) {
     std::random_device rd;
     std::default_random_engine en(rd());
-    std::uniform_int_distribution<int> rnd(0, q-1);
+    std::uniform_int_distribution<uint64_t> rnd(0, q-1);
 
     return rnd(en);
 }
@@ -18,7 +18,7 @@ uint64_t generate_number(uint64_t q) {
 void random_uniform_vector_mod_q(uint64_t *ax, size_t N, uint64_t q) {
     std::random_device rd;
     std::default_random_engine en(rd());
-    std::uniform_int_distribution<int> rnd(0, q-1);
+    std::uniform_int_distribution<uint64_t> rnd(0, q-1);
 
     for (size_t i = 0; i < N; i++) { 
         ax[i] = rnd(en);
