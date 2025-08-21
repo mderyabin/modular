@@ -60,7 +60,7 @@ make
 
 # How to run benchmakrs
 
-After compilation, you can run benchmarks with command from the root directory of the project:
+Benchmarks are based on the Google Benchmark library. After compilation, you can run benchmarks with command from the root directory of the project:
 
 ```
 ./build/bin/benchmark/ntmath-bench
@@ -69,4 +69,14 @@ After compilation, you can run benchmarks with command from the root directory o
 Note, that you can verify correctness operations vs naive approach by running this file:
 ```
 ./build/bin/examples/test
+```
+
+# How to run unit tests
+
+Configure the cmake with parameter `-DBUILD_TESTING=ON` to turn the unit tests on. Unit tests are based on Google Test
+
+```
+cmake .. -DBUILD_TESTING=ON
+make 
+ctest
 ```
