@@ -20,15 +20,16 @@ uint64_t mod_mul_barrett(uint64_t a, uint64_t b, uint64_t q, uint64_t prec, size
     uint128_t mul = static_cast<uint128_t>(a) * static_cast<uint128_t>(b);
 
     uint128_t tmp1 = mul;
-    uint128_t tmp2 = tmp1 >> (logq-1);
+    uint128_t tmp2 = tmp1 >> (logq - 2);
 
     tmp1 = tmp2 * prec;
-    tmp2 = tmp1 >> (logq + 1);
+    tmp2 = tmp1 >> (logq + 2);
     tmp1 = tmp2 * q;
 
     uint64_t res = static_cast<uint64_t>(mul - tmp1);
 
     if (res >= q) res -= q;
+    // if (res >= q) res -= q;
 
     return res;
 }

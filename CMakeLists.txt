@@ -35,7 +35,7 @@ FetchContent_MakeAvailable(benchmark)
 
 add_subdirectory(benchmark)
 
-
+# main loop: add executables for all example files 
 file (GLOB EXAMPLES_SRC_FILES CONFIGURE_DEPENDS examples/*.cpp)
 foreach (app ${EXAMPLES_SRC_FILES})
     get_filename_component ( exe ${app} NAME_WE )
@@ -43,3 +43,19 @@ foreach (app ${EXAMPLES_SRC_FILES})
     set_property(TARGET ${exe} PROPERTY RUNTIME_OUTPUT_DIRECTORY ${CMAKE_RUNTIME_OUTPUT_DERICTORY}/examples)
     target_link_libraries(${exe} PUBLIC modular)
 endforeach()
+
+# test structure organization
+include(CTest)
+if(BUILD_TESTING)
+    FetchContent_Declare(
+        googletest
+        GIT_REPOSITORY https://github.com/google/googletest.git
+        GIT_TAG v1.14.0  
+    )
+    # Для MSVC: отключим установку GoogleTest
+    set(INSTALL_GTEST OFF CACHE BOOL "Disable install" FORCE)
+    FetchContent_MakeAvailable(googletest)
+
+    add_subdirectory(test)
+    
+endif()
